@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded || Input.touchCount > 0 && isGrounded)
         {
             rb.velocity = Vector2.up * 40f;
         }
