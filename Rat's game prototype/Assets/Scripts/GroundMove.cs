@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class GroundMove : MonoBehaviour
 {
-    public float speed;
-    public float lowerXValue = -8;
-    private float destroyXvalue = -30;
-    private float upperXValue = 17;
-    public GameObject pipe;
-    private bool Instant = false;
-    // Start is called before the first frame update
+    public GameObject GroundManager;
+    public GameObject Ground;
+    private float _speed = 8;
+    private float _lowerXValue = -0.9f;
+    private float _upperXValue = 23;
+    private float _destroyXValue = -50;
+    private GameObject _newpipe, _newpiperand;
+    private bool _Instant = false;
     
-
-    // Update is called once per frame
-    void Update()
-    {
-        pipe.transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, 0,0);
-        if (pipe.transform.position.x <= lowerXValue && !Instant)
+    private void Start() {
+        _newpipe = GroundManager.GetComponent<GroundManager>().GetPrefub();
+    }
+    private void Update() {
+        transform.position = new Vector3(transform.position.x - _speed * Time.deltaTime, 0,0);
+        if (transform.position.x <= _lowerXValue && !_Instant)
         {
-            GameObject newpipe = Instantiate(pipe);
-            newpipe.transform.position = new Vector3(upperXValue, 0, 0);
-            Instant = true;
+            _newpiperand = Instantiate(_newpipe);
+            _newpiperand.transform.position = new Vector3(_upperXValue, 0, 0);
+            _newpiperand.GetComponent<GroundMove>().enabled = true;
+            _Instant = true;
         }
-        if (pipe.transform.position.x <= lowerXValue && !Instant)
+        if (transform.position.x <= _destroyXValue)
         {
-            GameObject newpipe = Instantiate(pipe);
-            newpipe.transform.position = new Vector3(upperXValue, 0, 0);
-            Instant = true;
-        }
-        if (pipe.transform.position.x < destroyXvalue)
-        {
-            Destroy(pipe);
+            Destroy(gameObject);
         }
     }
 }
