@@ -7854,6 +7854,7 @@ GameObject:
   - component: {fileID: 770946702}
   - component: {fileID: 770946704}
   - component: {fileID: 770946703}
+  - component: {fileID: 770946705}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7979,6 +7980,26 @@ MonoBehaviour:
   gameManager: {fileID: 218677884}
   Coins: {fileID: 943487649}
   isGrounded: 0
+  anim: {fileID: 770946705}
+--- !u!95 &770946705
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770946699}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32dc4b6cde4a8864680419d2d5b34d6c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &868444770
 GameObject:
   m_ObjectHideFlags: 0
