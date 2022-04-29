@@ -7,8 +7,8 @@ public class GroundMove : MonoBehaviour
     public GameObject GroundManager;
     public GameObject Ground;
     private float _speed = 8;
-    private float _lowerXValue = -0.9f;
-    private float _upperXValue = 23;
+    private float _lowerXValue = -1.5f;
+    private float _upperXValue = 24.44f;
     private float _destroyXValue = -50;
     private GameObject _newpipe, _newpiperand;
     private bool _Instant = false;
