@@ -9,7 +9,7 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D _rb;
     public GameObject Coins;
     private int _coins;
-    public bool isGrounded;
+    public bool onGrounded;
     public Animator anim;
     void Start()
     {
@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded || Input.touchCount > 0 && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && onGrounded || Input.touchCount > 0 && onGrounded)
         {
             _rb.velocity = Vector2.up * 40f;
             anim.SetBool("isGround", false);
@@ -45,7 +45,7 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             anim.SetBool("isGround", true);
-            isGrounded = true;
+            onGrounded = true;
         }
         
     }
@@ -54,7 +54,7 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             
-            isGrounded = false;
+            onGrounded = false;
         }
     }
 }
