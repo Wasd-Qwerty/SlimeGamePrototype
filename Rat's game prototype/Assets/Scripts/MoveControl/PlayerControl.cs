@@ -8,8 +8,12 @@ public class PlayerControl : MonoBehaviour
     public GameManager gameManager;
     private Rigidbody2D _rb;
     public GameObject Coins;
+    public float jumpForce = 40f;
     private int _coins;
-    public bool onGrounded;
+    public bool onGround;
+    public Transform groundCheck;
+    public float checkRadius = 0.5f;
+    public LayerMask Ground;
     public Animator anim;
     void Start()
     {
@@ -19,11 +23,28 @@ public class PlayerControl : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && onGrounded || Input.touchCount > 0 && onGrounded)
+        Jump();
+        CheckingGround();
+        if (onGround)
         {
-            _rb.velocity = Vector2.up * 40f;
-            anim.SetBool("isGround", false);
+            anim.SetBool("onGround", true);
         }
+        else
+        {
+            anim.SetBool("onGround", false);
+        }
+    }
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && onGround || Input.touchCount > 0 && onGround)
+        {
+            _rb.velocity = new Vector2(0,jumpForce);
+            
+        }
+    }
+    void CheckingGround()
+    {
+        onGround = Physics2D.OverlapCircle(groundCheck.position, checkRadius, Ground);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,8 +65,8 @@ public class PlayerControl : MonoBehaviour
         }
         if (collision.gameObject.tag == "Ground")
         {
-            anim.SetBool("isGround", true);
-            onGrounded = true;
+            
+            onGround = true;
         }
         
     }
@@ -54,7 +75,7 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             
-            onGrounded = false;
+            onGround = false;
         }
     }
 }
