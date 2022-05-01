@@ -7,9 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gameOverCanvas;
-    public GameObject CountObj;
-    public GameObject BestCountObj;
+    public GameObject gameOverCanvas, pauseCanvas, pauseButton, CountObj, BestCountObj;
     private float _countText = 0;
     private float _bestCountText;
     // Update is called once per frame
@@ -18,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         _bestCountText = PlayerPrefs.GetFloat("bestCount", _bestCountText);
         gameOverCanvas.SetActive(false);
+        pauseCanvas.SetActive(false);
         Time.timeScale = 1;
     }
     void Update()
@@ -41,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         gameOverCanvas.SetActive(true);
+        pauseButton.SetActive(false);
     }
     public void GoToMenu(){
         SceneManager.LoadScene(0);
@@ -48,5 +48,19 @@ public class GameManager : MonoBehaviour
     public void Replay()
     {
         SceneManager.LoadScene(1);
+    }
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        pauseCanvas.SetActive(true);
+    }
+    public void Resume()
+    {
+        pauseCanvas.SetActive(false);
+        while (Time.timeScale < 1)
+        {
+            Time.timeScale += 0.1f;
+        }
+        Time.timeScale = 1;
     }
 }
