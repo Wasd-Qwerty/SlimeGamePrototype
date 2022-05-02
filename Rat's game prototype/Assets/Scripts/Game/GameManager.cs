@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gameOverCanvas, pauseCanvas, pauseButton, CountObj, BestCountObj;
+    public GameObject gameOverCanvas, pauseCanvas, pauseButton, CountObj, BestCountObj, Tutorial;
     private float _countText = 0;
     private float _bestCountText;
+    bool _tutorialIsActive;
     // Update is called once per frame
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         gameOverCanvas.SetActive(true);
+        Tutorial.SetActive(false);
         pauseButton.SetActive(false);
     }
     public void GoToMenu(){
@@ -51,16 +53,15 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
+        _tutorialIsActive = Tutorial.activeSelf;
         Time.timeScale = 0;
+        Tutorial.SetActive(false);
         pauseCanvas.SetActive(true);
     }
     public void Resume()
     {
         pauseCanvas.SetActive(false);
-        while (Time.timeScale < 1)
-        {
-            Time.timeScale += 0.1f;
-        }
+        Tutorial.SetActive(_tutorialIsActive);
         Time.timeScale = 1;
     }
 }

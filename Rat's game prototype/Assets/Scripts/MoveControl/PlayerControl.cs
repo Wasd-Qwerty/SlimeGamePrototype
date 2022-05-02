@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoBehaviour, IPointerDownHandler
 {
     public GameManager gameManager;
+    public GameObject Coins, Tutorial;
     private Rigidbody2D _rb;
-    public GameObject Coins;
     public float jumpForce = 40f;
     private int _coins;
     public bool onGround;
@@ -23,7 +24,6 @@ public class PlayerControl : MonoBehaviour
     }
     void Update()
     {
-        Jump();
         CheckingGround();
         if (onGround)
         {
@@ -34,12 +34,22 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("onGround", false);
         }
     }
-    void Jump()
+    public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && onGround || Input.touchCount > 0 && onGround)
+        if (onGround && Time.timeScale == 1)
         {
+            Tutorial.SetActive(false);
             _rb.velocity = new Vector2(0,jumpForce);
             
+        }
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (onGround)
+        {
+            Tutorial.SetActive(false);
+            _rb.velocity = new Vector2(0, jumpForce);
+
         }
     }
     void CheckingGround()
@@ -63,11 +73,6 @@ public class PlayerControl : MonoBehaviour
         {
             gameManager.GameOver();
         }
-        if (collision.gameObject.tag == "Ground")
-        {
-            
-            onGround = true;
-        }
         
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -78,4 +83,5 @@ public class PlayerControl : MonoBehaviour
             onGround = false;
         }
     }
+
 }
