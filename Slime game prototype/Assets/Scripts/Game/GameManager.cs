@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private float _countText = 0;
     private float _bestCountText;
     bool _tutorialIsActive;
+    public InitializeAdsBanner IntAd;
     // Update is called once per frame
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
         gameOverCanvas.SetActive(false);
         pauseCanvas.SetActive(false);
         Time.timeScale = 1;
+        IntAd.Show();
     }
     void Update()
     {
@@ -35,7 +37,6 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("bestCount", _bestCountText);
             PlayerPrefs.Save();
         }
-
     }
     public void GameOver()
     {

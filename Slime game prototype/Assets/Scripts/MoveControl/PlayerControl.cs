@@ -7,11 +7,11 @@ using UnityEngine.EventSystems;
 public class PlayerControl : MonoBehaviour, IPointerDownHandler
 {
     public GameManager gameManager;
-    public GameObject Coins, Tutorial;
+    public GameObject Coins, Tutorial, GameOverUI;
     private Rigidbody2D _rb;
     public float jumpForce = 40f;
     private int _coins;
-    public bool onGround;
+    public bool onGround, resume;
     public Transform groundCheck;
     public float checkRadius = 0.5f;
     public LayerMask Ground;
@@ -66,22 +66,17 @@ public class PlayerControl : MonoBehaviour, IPointerDownHandler
             PlayerPrefs.Save();
             Destroy(collision.gameObject);
         }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
         if (collision.gameObject.tag == "ObjectResp")
         {
             gameManager.GameOver();
+            Destroy(collision.gameObject);
         }
-        
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    public void ResumePlay()
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            
-            onGround = false;
-        }
+        resume = true;
+        transform.position = new Vector2(-7, 7);
+        Time.timeScale = 1;
+        GameOverUI.SetActive(false);
     }
-
 }
