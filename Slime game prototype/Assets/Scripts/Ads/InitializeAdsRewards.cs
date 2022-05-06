@@ -7,11 +7,11 @@ public class InitializeAdsRewards : MonoBehaviour
     private RewardedAd rewardedAd;
     public GameObject player, resumeButton;
 #if UNITY_ANDROID
-    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917"; //тестовый айди
+    private const string rewardedUnitId = "ca-app-pub-4625792341181156/3698041971"; //тестовый айди
 #elif UNITY_IPHONE
-    private const string rewardedUnitId = "";
+    private const string rewardedUnitId = "ca-app-pub-4625792341181156/3698041971";
 #else
-    private const string rewardedUnitId = "unexpected_platform";
+    private const string rewardedUnitId = "ca-app-pub-4625792341181156/3698041971";
 #endif
     void OnEnable()
     {

@@ -8,11 +8,11 @@ public class InitializeAdsBanner : MonoBehaviour
     private BannerView bannerView;
 
 #if UNITY_ANDROID
-    string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
+    string bannerUnitId = "ca-app-pub-4625792341181156/1890685023";
 #elif UNITY_IPHONE
-    string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
+    string bannerUnitId = "ca-app-pub-4625792341181156/1890685023";
 #else
-    string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
+    string bannerUnitId = "ca-app-pub-4625792341181156/1890685023";
 #endif
     private void OnEnable()
     {

@@ -346,27 +346,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100295020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08d2c8a3281676b43bb772d9aa891939, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_EffectColor: {r: 0.8494571, g: 0.9528302, b: 0.87125266, a: 0.6039216}
+  m_EffectDistance: {x: 10, y: -10}
+  m_UseGraphicAlpha: 0
 --- !u!222 &100295023
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -828,10 +813,10 @@ GameObject:
   - component: {fileID: 160851329}
   - component: {fileID: 160851328}
   - component: {fileID: 160851327}
-  - component: {fileID: 160851330}
   - component: {fileID: 160851331}
   - component: {fileID: 160851332}
   - component: {fileID: 160851333}
+  - component: {fileID: 160851330}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -911,7 +896,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160851326}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad1f0cf5f6249ac4e9d62eef29a52e7c, type: 3}
   m_Name: 
@@ -923,7 +908,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160851326}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83cb44d194ce9604eab1104ac360a811, type: 3}
   m_Name: 
@@ -935,7 +920,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160851326}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 413c32494b5baa4488d5ab9b978680c7, type: 3}
   m_Name: 
@@ -949,7 +934,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160851326}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21228332fa7343946bd020b6bea95e8b, type: 3}
   m_Name: 
@@ -17538,7 +17523,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.14284293, g: 1, b: 0.015686274, a: 1}
   m_Intensity: 3
-  m_Range: 3.2111156
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

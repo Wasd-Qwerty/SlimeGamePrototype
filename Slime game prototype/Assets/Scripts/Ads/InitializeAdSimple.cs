@@ -7,11 +7,11 @@ public class InitializeAdSimple : MonoBehaviour
     private InterstitialAd interstitialAd;
 
 #if UNITY_ANDROID
-    private const string interstitialUnitId = "ca-app-pub-3940256099942544/8691691433"; //тестовый айди
+    private const string interstitialUnitId = "ca-app-pub-4625792341181156/1341758799"; //тестовый айди
 #elif UNITY_IPHONE
-    private const string interstitialUnitId = "";
+    private const string interstitialUnitId = "ca-app-pub-4625792341181156/1341758799";
 #else
-    private const string interstitialUnitId = "unexpected_platform";
+    private const string interstitialUnitId = "ca-app-pub-4625792341181156/1341758799";
 #endif
     void OnEnable()
     {
