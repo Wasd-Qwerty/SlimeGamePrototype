@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         gameOverCanvas.SetActive(false);
         pauseCanvas.SetActive(false);
         Time.timeScale = 1;
-        /*IntAd.Show();*/
+        IntAd.Show();
     }
     void Update()
     {
