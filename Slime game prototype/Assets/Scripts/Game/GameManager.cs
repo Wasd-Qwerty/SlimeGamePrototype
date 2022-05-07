@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gameOverCanvas, pauseCanvas, pauseButton, CountObj, BestCountObj, Tutorial;
+    public GameObject gameOverCanvas, pauseCanvas, pauseButton, CountObj, BestCountObj, Tutorial, GroundManager;
     private float _countText = 0;
     private float _bestCountText;
     bool _tutorialIsActive;
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         gameOverCanvas.SetActive(false);
         pauseCanvas.SetActive(false);
         Time.timeScale = 1;
-        IntAd.Show();
+        /*IntAd.Show();*/
     }
     void Update()
     {
@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     }
     public void Resume()
     {
+        GroundManager.GetComponent<GroundManager>().speed = 10;
         pauseCanvas.SetActive(false);
         Tutorial.SetActive(_tutorialIsActive);
         Time.timeScale = 1;
