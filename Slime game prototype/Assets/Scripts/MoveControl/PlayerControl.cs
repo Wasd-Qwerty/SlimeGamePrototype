@@ -9,11 +9,10 @@ public class PlayerControl : MonoBehaviour, IPointerDownHandler
     public GameManager gameManager;
     public GameObject Coins, Tutorial, GameOverUI;
     private Rigidbody2D _rb;
-    public float jumpForce = 40f;
+    private float _jumpForce = 40f, _checkRadius = 0.1f;
     private int _coins;
     public bool onGround, resume;
     public Transform groundCheck;
-    public float checkRadius = 0.5f;
     public LayerMask Ground;
     public Animator anim;
     void Start()
@@ -39,7 +38,7 @@ public class PlayerControl : MonoBehaviour, IPointerDownHandler
         if (onGround && Time.timeScale == 1)
         {
             Tutorial.SetActive(false);
-            _rb.velocity = new Vector2(0,jumpForce);
+            _rb.velocity = new Vector2(0,_jumpForce);
             
         }
     }
@@ -48,13 +47,13 @@ public class PlayerControl : MonoBehaviour, IPointerDownHandler
         if (onGround)
         {
             Tutorial.SetActive(false);
-            _rb.velocity = new Vector2(0, jumpForce);
+            _rb.velocity = new Vector2(0, _jumpForce);
 
         }
     }
     void CheckingGround()
     {
-        onGround = Physics2D.OverlapCircle(groundCheck.position, checkRadius, Ground);
+        onGround = Physics2D.OverlapCircle(groundCheck.position, _checkRadius, Ground);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -71,12 +70,5 @@ public class PlayerControl : MonoBehaviour, IPointerDownHandler
             gameManager.GameOver();
             Destroy(collision.gameObject);
         }
-    }
-    public void ResumePlay()
-    {
-        resume = true;
-        transform.position = new Vector2(-7, 7);
-        Time.timeScale = 1;
-        GameOverUI.SetActive(false);
     }
 }

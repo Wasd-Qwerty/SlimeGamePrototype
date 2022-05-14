@@ -926,7 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413c32494b5baa4488d5ab9b978680c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 853736164}
+  GameManager: {fileID: 218677883}
   resumeButton: {fileID: 207690185}
 --- !u!114 &160851333
 MonoBehaviour:
@@ -1105,13 +1105,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00c74bf31bc3024a9a4b13c3688f69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 853736164}
+  mainCamera: {fileID: 160851326}
   gameOverCanvas: {fileID: 1993945077}
   pauseCanvas: {fileID: 1712149713}
   pauseButton: {fileID: 2035836403}
   CountObj: {fileID: 263921297}
   BestCountObj: {fileID: 1167436458}
   Tutorial: {fileID: 1301056149}
-  GroundManager: {fileID: 0}
+  audioTag: BG_audio_created
   IntAd: {fileID: 160851331}
 --- !u!4 &218677885
 Transform:
@@ -8507,18 +8509,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 160851333}
-        m_TargetAssemblyTypeName: InitializeAdSimple, Assembly-CSharp
-        m_MethodName: ShowAd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &558619743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12941,11 +12931,9 @@ MonoBehaviour:
   Coins: {fileID: 943487649}
   Tutorial: {fileID: 1301056149}
   GameOverUI: {fileID: 1993945077}
-  jumpForce: 40
   onGround: 0
   resume: 0
   groundCheck: {fileID: 801497053}
-  checkRadius: 0.1
   Ground:
     serializedVersion: 2
     m_Bits: 256

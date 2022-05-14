@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public Sprite newSpritePlay, newSpriteQuit, AudioOn, AudioOff;
-    private GameObject AudioSource;
+    private GameObject _audioSource;
     public string audioTag;
     public Image play, quit, AudioController;
+
     private void Start() {
         Time.timeScale = 1;
-        AudioSource = GameObject.FindWithTag(audioTag);
-        if (AudioSource.GetComponent<AudioSource>().enabled)
+        _audioSource = GameObject.FindWithTag(audioTag);
+        if (_audioSource.GetComponent<AudioSource>().enabled)
         {
             AudioController.sprite = AudioOn;
         }
@@ -28,7 +29,7 @@ public class MenuManager : MonoBehaviour
     }
     public void AudioControl()
     {
-        if (AudioSource.GetComponent<AudioSource>().enabled)
+        if (_audioSource.GetComponent<AudioSource>().enabled)
         {
             AudioController.sprite = AudioOff;
         }
@@ -36,7 +37,7 @@ public class MenuManager : MonoBehaviour
         {
             AudioController.sprite = AudioOn;
         }
-        AudioSource.GetComponent<AudioSource>().enabled = !AudioSource.GetComponent<AudioSource>().enabled;
+        _audioSource.GetComponent<AudioSource>().enabled = !_audioSource.GetComponent<AudioSource>().enabled;
     }
     public void Quit(){
         quit.sprite = newSpriteQuit;

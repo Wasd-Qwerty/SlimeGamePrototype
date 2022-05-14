@@ -5,20 +5,23 @@ using GoogleMobileAds.Api;
 public class InitializeAdsRewards : MonoBehaviour
 {
     private RewardedAd rewardedAd;
-    public GameObject player, resumeButton;
+    public GameObject GameManager, resumeButton;
 #if UNITY_ANDROID
-    private const string rewardedUnitId = "ca-app-pub-4625792341181156/3698041971"; //тестовый айди
+    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917"; //тестовый айди
 #elif UNITY_IPHONE
-    private const string rewardedUnitId = "ca-app-pub-4625792341181156/3698041971";
+    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
 #else
-    private const string rewardedUnitId = "ca-app-pub-4625792341181156/3698041971";
+    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
 #endif
     void OnEnable()
     {
         rewardedAd = new RewardedAd(rewardedUnitId);
         AdRequest adRequest = new AdRequest.Builder().Build();
         rewardedAd.LoadAd(adRequest);
-        
+        if (rewardedAd.IsLoaded())
+        {
+            resumeButton.SetActive(true);
+        }
         rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
     }
 
@@ -38,6 +41,6 @@ public class InitializeAdsRewards : MonoBehaviour
     public void HandleUserEarnedReward(object sender, Reward args)
     {
         Destroy(resumeButton.gameObject);
-        player.GetComponent<PlayerControl>().ResumePlay();
+        GameManager.GetComponent<GameManager>().ResumePlay();
     }
 }

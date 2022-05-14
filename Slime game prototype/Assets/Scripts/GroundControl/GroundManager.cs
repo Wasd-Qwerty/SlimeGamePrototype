@@ -11,7 +11,6 @@ public class GroundManager : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(speed);
         if (speed < 14 && Time.timeScale == 1)
         {
             speed += 0.001f;
