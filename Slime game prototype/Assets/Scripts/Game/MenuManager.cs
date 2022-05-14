@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     private void Start() {
         Time.timeScale = 1;
         _audioSource = GameObject.FindWithTag(audioTag);
+        _audioSource.GetComponent<AudioSource>().pitch = 1;
         if (_audioSource.GetComponent<AudioSource>().enabled)
         {
             AudioController.sprite = AudioOn;
