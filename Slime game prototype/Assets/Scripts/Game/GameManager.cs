@@ -8,14 +8,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject player, mainCamera, gameOverCanvas, pauseCanvas, pauseButton, CountObj, BestCountObj, Tutorial;
-    private GameObject _audioSource;
+    private GameObject _audioSource, _obj;
     private float _countText = 0, _bestCountText;
     public string audioTag;
     bool _tutorialIsActive, _timerIsDead, _timerIsResume;
     public InitializeAdsBanner IntAd;
-    private float _timer;
-    // Update is called once per frame
-    // Start is called before the first frame update
     void Start()
     {
         _audioSource = GameObject.FindWithTag(audioTag);
@@ -25,6 +22,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         IntAd.Show();
         pauseButton.SetActive(true);
+        _obj = GameObject.FindWithTag(audioTag);
+        if (_obj != null)
+        {
+            Destroy(this.gameObject);
+        }
     }
     void Update()
     {
@@ -41,28 +43,31 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("bestCount", _bestCountText);
             PlayerPrefs.Save();
         }
-        if (_timerIsDead)
+        if (_obj != null)
         {
-            if (_audioSource.GetComponent<AudioSource>().pitch > 0)
+            if (_timerIsDead)
             {
-                _audioSource.GetComponent<AudioSource>().pitch -= 0.001f;
+                if (_audioSource.GetComponent<AudioSource>().pitch > 0)
+                {
+                    _audioSource.GetComponent<AudioSource>().pitch -= 0.001f;
+                }
+                else
+                {
+                    _audioSource.GetComponent<AudioSource>().pitch = 0;
+                    _timerIsDead = false;
+                }
             }
-            else
+            if (_timerIsResume)
             {
-                _audioSource.GetComponent<AudioSource>().pitch = 0;
-                _timerIsDead = false;
-            }
-        }
-        if (_timerIsResume)
-        {
-            if (_audioSource.GetComponent<AudioSource>().pitch > -5)
-            {
-                _audioSource.GetComponent<AudioSource>().pitch -= 0.01f;
-            }
-            else
-            {
-                _audioSource.GetComponent<AudioSource>().pitch = 1;
-                _timerIsResume = false;
+                if (_audioSource.GetComponent<AudioSource>().pitch > -5)
+                {
+                    _audioSource.GetComponent<AudioSource>().pitch -= 0.01f;
+                }
+                else
+                {
+                    _audioSource.GetComponent<AudioSource>().pitch = 1;
+                    _timerIsResume = false;
+                }
             }
         }
     }
@@ -80,7 +85,10 @@ public class GameManager : MonoBehaviour
     }
     public void Replay()
     {
-        _audioSource.GetComponent<AudioSource>().pitch = 1;
+        if (_obj != null)
+        {
+            _audioSource.GetComponent<AudioSource>().pitch = 1;
+        }
         SceneManager.LoadScene(1);
     }
     public void Pause()

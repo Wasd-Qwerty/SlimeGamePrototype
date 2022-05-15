@@ -9,15 +9,15 @@ public class InitializeAdSimple : MonoBehaviour
     public InterstitialAd interstitialAd;
 
 #if UNITY_ANDROID
-    private const string interstitialUnitId = "ca-app-pub-3940256099942544/1033173712"; //тестовый айди
+    private const string _interstitialUnitId = "ca-app-pub-3940256099942544/1033173712"; //тестовый айди
 #elif UNITY_IPHONE
-    private const string interstitialUnitId = "ca-app-pub-3940256099942544/1033173712";
+    private const string _interstitialUnitId = "ca-app-pub-3940256099942544/1033173712";
 #else
-    private const string interstitialUnitId = "ca-app-pub-3940256099942544/1033173712";
+    private const string _interstitialUnitId = "ca-app-pub-3940256099942544/1033173712";
 #endif
     void OnEnable()
     {
-        interstitialAd = new InterstitialAd(interstitialUnitId);
+        interstitialAd = new InterstitialAd(_interstitialUnitId);
         AdRequest adRequest = new AdRequest.Builder().Build();
         interstitialAd.LoadAd(adRequest);
     }

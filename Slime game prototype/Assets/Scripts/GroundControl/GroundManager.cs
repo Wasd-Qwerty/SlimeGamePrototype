@@ -5,6 +5,11 @@ using UnityEngine;
 public class GroundManager : MonoBehaviour
 {
     public float speed;
+    public List<GameObject> prefabs = new List<GameObject>();
+    
+    public GameObject GetPrefub() {
+        return prefabs[Random.Range(0, prefabs.Count)];
+    }
     private void Start()
     {
         speed = 10;
@@ -15,9 +20,5 @@ public class GroundManager : MonoBehaviour
         {
             speed += 0.001f;
         }
-    }
-    public List<GameObject> prefabs = new List<GameObject>();
-    public GameObject GetPrefub() {
-        return prefabs[Random.Range(0, prefabs.Count)];
     }
 }

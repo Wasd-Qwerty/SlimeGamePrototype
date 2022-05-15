@@ -15,11 +15,16 @@ public class PlayerControl : MonoBehaviour, IPointerDownHandler
     public Transform groundCheck;
     public LayerMask Ground;
     public Animator anim;
+
+    private AudioSource _audiosource;
+    public AudioClip onGrounded;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _coins = PlayerPrefs.GetInt("coins", _coins);
         Coins.GetComponent<Text>().text = _coins.ToString();
+        _audiosource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -39,7 +44,6 @@ public class PlayerControl : MonoBehaviour, IPointerDownHandler
         {
             Tutorial.SetActive(false);
             _rb.velocity = new Vector2(0,_jumpForce);
-            
         }
     }
     public void OnPointerDown(PointerEventData eventData)
@@ -51,20 +55,24 @@ public class PlayerControl : MonoBehaviour, IPointerDownHandler
 
         }
     }
+    public void onGroundedPlay()
+    {
+        _audiosource.PlayOneShot(onGrounded);
+    }
     void CheckingGround()
     {
         onGround = Physics2D.OverlapCircle(groundCheck.position, _checkRadius, Ground);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Coin")
+        /*if (collision.gameObject.tag == "Coin")
         {
             _coins += 1;
             Coins.GetComponent<Text>().text = _coins.ToString();
             PlayerPrefs.SetInt("coins", _coins);
             PlayerPrefs.Save();
             Destroy(collision.gameObject);
-        }
+        }*/
         if (collision.gameObject.tag == "ObjectResp")
         {
             gameManager.GameOver();
