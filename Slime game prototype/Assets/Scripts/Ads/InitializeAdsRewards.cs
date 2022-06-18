@@ -1,46 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GoogleMobileAds.Api;
+using YandexMobileAds;
+using YandexMobileAds.Base;
+
 public class InitializeAdsRewards : MonoBehaviour
 {
     private RewardedAd rewardedAd;
-    public GameObject GameManager, resumeButton;
-#if UNITY_ANDROID
-    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917"; //тестовый айди
-#elif UNITY_IPHONE
-    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
-#else
-    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
-#endif
-    void OnEnable()
+    public GameManager gm;
+    public void RequestRewardedAd()
     {
-        rewardedAd = new RewardedAd(rewardedUnitId);
-        AdRequest adRequest = new AdRequest.Builder().Build();
-        rewardedAd.LoadAd(adRequest);
-        if (rewardedAd.IsLoaded())
-        {
-            resumeButton.SetActive(true);
-        }
-        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        string adUnitId = "R-M-1652221-3";
+        rewardedAd = new RewardedAd(adUnitId);
+        AdRequest request = new AdRequest.Builder().Build();
+        rewardedAd.LoadAd(request);
+        rewardedAd.OnRewardedAdShown += this.HandleRewardedAdShown;
     }
 
-    void OnDisable()
+    private void HandleRewardedAdShown(object sender, EventArgs e)
     {
-        rewardedAd.OnUserEarnedReward -= HandleUserEarnedReward;
+        gm.ResumePlay();
     }
 
-    public void ShowRewardedAd()
+    private void ShowRewardedAd()
     {
-        if (rewardedAd.IsLoaded())
+        if (this.rewardedAd.IsLoaded())
         {
             rewardedAd.Show();
         }
-    }
-
-    public void HandleUserEarnedReward(object sender, Reward args)
-    {
-        Destroy(resumeButton.gameObject);
-        GameManager.GetComponent<GameManager>().ResumePlay();
+        else
+        {
+            Debug.Log("Rewarded Ad is not ready yet");
+        }
     }
 }

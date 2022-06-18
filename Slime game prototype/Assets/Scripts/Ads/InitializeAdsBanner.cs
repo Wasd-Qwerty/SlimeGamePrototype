@@ -1,27 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GoogleMobileAds.Api;
+using YandexMobileAds;
+using YandexMobileAds.Base;
 
 public class InitializeAdsBanner : MonoBehaviour
 {
-    private BannerView bannerView;
-
-#if UNITY_ANDROID
-    string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
-#elif UNITY_IPHONE
-    string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
-#else
-    string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
-#endif
-    private void OnEnable()
+    private Banner banner;
+    string adUnitId = "R-M-1652221-1";
+    public void RequestBanner()
     {
-        bannerView = new BannerView(bannerUnitId, AdSize.Banner, AdPosition.Top);
+        banner = new Banner(adUnitId, AdSize.BANNER_320x50, AdPosition.BottomCenter);
         AdRequest request = new AdRequest.Builder().Build();
-        bannerView.LoadAd(request);
-    }
-    public void Show()
-    {
-        bannerView.Show();
+        banner.LoadAd(request);
     }
 }

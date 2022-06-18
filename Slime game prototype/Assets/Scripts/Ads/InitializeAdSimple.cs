@@ -2,40 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using GoogleMobileAds.Api;
 using UnityEngine.SceneManagement;
+using YandexMobileAds;
+using YandexMobileAds.Base;
+
 public class InitializeAdSimple : MonoBehaviour
 {
-    public InterstitialAd interstitialAd;
-
-#if UNITY_ANDROID
-    private const string _interstitialUnitId = "ca-app-pub-3940256099942544/1033173712"; //тестовый айди
-#elif UNITY_IPHONE
-    private const string _interstitialUnitId = "ca-app-pub-3940256099942544/1033173712";
-#else
-    private const string _interstitialUnitId = "ca-app-pub-3940256099942544/1033173712";
-#endif
-    void OnEnable()
+    private Interstitial interstitial;
+    public void RequestInterstitial()
     {
-        interstitialAd = new InterstitialAd(_interstitialUnitId);
-        AdRequest adRequest = new AdRequest.Builder().Build();
-        interstitialAd.LoadAd(adRequest);
+        string adUnitId = "R-M-1652221-4";
+        interstitial = new Interstitial(adUnitId);
+        AdRequest request = new AdRequest.Builder().Build();
+        interstitial.LoadAd(request);
     }
-
-    public void ShowAd()
+    private void ShowInterstitial()
     {
-        if (interstitialAd.IsLoaded())
+        if (this.interstitial.IsLoaded())
         {
-            interstitialAd.Show();
+            interstitial.Show();
         }
         else
         {
-            SceneManager.LoadScene(0);
+            Debug.Log("Interstitial is not ready yet");
         }
-        interstitialAd.OnAdClosed += HandleOnAdClosed;
-    }
-    public void HandleOnAdClosed(object sender, EventArgs args)
-    {
-        SceneManager.LoadScene(0);
     }
 }

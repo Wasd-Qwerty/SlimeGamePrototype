@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         _audioSource = GameObject.FindWithTag(audioTag);
         _bestCountText = PlayerPrefs.GetFloat("bestCount", _bestCountText);
         Time.timeScale = 1;
-        IntAd.Show();
+        IntAd.RequestBanner();
     }
     void Update()
     {
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         _timerIsResume = false;
     }
     public void GoToMenu(){
-        _mainCamera.GetComponent<InitializeAdSimple>().ShowAd();
+        _mainCamera.GetComponent<InitializeAdSimple>().RequestInterstitial();
     }
     public void Replay()
     {
@@ -102,6 +102,5 @@ public class GameManager : MonoBehaviour
         _timerIsResume = true;
         _player.transform.position = new Vector2(-7, 7);
         Time.timeScale = 1;
-
     }
 }
