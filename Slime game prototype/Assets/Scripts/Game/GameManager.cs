@@ -12,14 +12,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CanvasManager _canvas;
     private float _countText = 0, _bestCountText;
     public string audioTag;
-    [SerializeField] bool _tutorialIsActive, _timerIsDead, _timerIsResume;
+    [SerializeField] bool _tutorialIsActive, _timerIsDead, _timerIsResume, _isPaused;
     public InitializeAdsBanner IntAd;
     void Start()
     {
         _audioSource = GameObject.FindWithTag(audioTag);
         _bestCountText = PlayerPrefs.GetFloat("bestCount", _bestCountText);
         Time.timeScale = 1;
-        IntAd.RequestBanner();
+        IntAd.Show();
     }
     void Update()
     {
@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        if (_isPaused)
+        {
+            Pause();
+        }
     }
     public void GameOver()
     {
@@ -73,7 +77,7 @@ public class GameManager : MonoBehaviour
         _timerIsResume = false;
     }
     public void GoToMenu(){
-        _mainCamera.GetComponent<InitializeAdSimple>().RequestInterstitial();
+        _mainCamera.GetComponent<InitializeAdSimple>().ShowAd();
     }
     public void Replay()
     {
@@ -103,4 +107,14 @@ public class GameManager : MonoBehaviour
         _player.transform.position = new Vector2(-7, 7);
         Time.timeScale = 1;
     }
+    void OnApplicationQuit()
+    {
+        IntAd.DestroyAd();
+        _mainCamera.GetComponent<InitializeAdSimple>().DestroyAd();
+    }
+    void OnApplicationPause(bool _pauseStatus)
+    {
+        _isPaused = _pauseStatus;
+    }
+
 }

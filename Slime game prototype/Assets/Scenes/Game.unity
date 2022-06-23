@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 160851331}
   - component: {fileID: 160851332}
   - component: {fileID: 160851333}
+  - component: {fileID: 160851330}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -664,6 +665,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &160851330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160851326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1f0cf5f6249ac4e9d62eef29a52e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &160851331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,7 +701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413c32494b5baa4488d5ab9b978680c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 218677884}
+  GameManager: {fileID: 218677883}
+  resumeButton: {fileID: 207690185}
 --- !u!114 &160851333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,7 +799,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 160851332}
         m_TargetAssemblyTypeName: InitializeAdsRewards, Assembly-CSharp
-        m_MethodName: RequestRewardedAd
+        m_MethodName: ShowRewardedAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -878,7 +892,7 @@ MonoBehaviour:
   _tutorialIsActive: 0
   _timerIsDead: 0
   _timerIsResume: 0
-  IntAd: {fileID: 0}
+  IntAd: {fileID: 160851331}
 --- !u!4 &218677885
 Transform:
   m_ObjectHideFlags: 0
