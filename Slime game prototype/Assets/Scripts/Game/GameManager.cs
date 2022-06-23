@@ -7,28 +7,29 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _player, _mainCamera, CountObj, BestCountObj, Tutorial;
-    [SerializeField] private GameObject _audioSource;
+    [SerializeField] private GameObject _player, _mainCamera, _countObj, _bestCountObj, _tutorial, _audioSource, _resumeButton;
+    [SerializeField] private GroundManager _groundManager;
     [SerializeField] private CanvasManager _canvas;
     private float _countText = 0, _bestCountText;
     public string audioTag;
     [SerializeField] bool _tutorialIsActive, _timerIsDead, _timerIsResume, _isPaused;
-    public InitializeAdsBanner IntAd;
+    [SerializeField] YandexInterstitial _interstitial;
+    [SerializeField] YandexRewardedAd _rewardedAd;
     void Start()
     {
         _audioSource = GameObject.FindWithTag(audioTag);
         _bestCountText = PlayerPrefs.GetFloat("bestCount", _bestCountText);
         Time.timeScale = 1;
-        IntAd.Show();
+        _timerIsResume = true;
     }
     void Update()
     {
-        BestCountObj.GetComponent<Text>().text = Math.Round(_bestCountText, 2).ToString();
+        _bestCountObj.GetComponent<Text>().text = Math.Round(_bestCountText, 2).ToString();
         if (Time.timeScale == 1)
         {
             _countText += Time.deltaTime;
         }
-        CountObj.GetComponent<Text>().text = Math.Round(_countText, 2).ToString();
+        _countObj.GetComponent<Text>().text = Math.Round(_countText, 2).ToString();
 
         if (_countText > _bestCountText)
         {
@@ -71,13 +72,14 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _canvas.GameOver();
-        _timerIsDead = true;
         Time.timeScale = 0;
-        Tutorial.SetActive(false);
+        _tutorial.SetActive(false);
+        _timerIsDead = true;
         _timerIsResume = false;
     }
     public void GoToMenu(){
-        _mainCamera.GetComponent<InitializeAdSimple>().ShowAd();
+        _interstitial.RequestInterstitial();
+        SceneManager.LoadScene(0);
     }
     public void Replay()
     {
@@ -90,27 +92,26 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         _canvas.Pause();
-        _tutorialIsActive = Tutorial.activeSelf;
+        _tutorialIsActive = _tutorial.activeSelf;
         Time.timeScale = 0;
-        Tutorial.SetActive(false);
+        _tutorial.SetActive(false);
     }
     public void Resume()
     {
         _canvas.Resume();
-        Tutorial.SetActive(_tutorialIsActive);
+        _tutorial.SetActive(_tutorialIsActive);
         Time.timeScale = 1;
     }
     public void ResumePlay()
     {
+        Destroy(_resumeButton.gameObject);
+        _rewardedAd.RequestRewardedAd();
         _canvas.ResumePlay();
         _timerIsResume = true;
+        _timerIsDead = false;
         _player.transform.position = new Vector2(-7, 7);
-        Time.timeScale = 1;
-    }
-    void OnApplicationQuit()
-    {
-        IntAd.DestroyAd();
-        _mainCamera.GetComponent<InitializeAdSimple>().DestroyAd();
+        _groundManager.ResetSpeed();
+        Time.timeScale = 1f;
     }
     void OnApplicationPause(bool _pauseStatus)
     {

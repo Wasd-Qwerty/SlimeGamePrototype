@@ -6,7 +6,7 @@ public class GroundManager : MonoBehaviour
 {
     public float speed;
     public List<GameObject> prefabs = new List<GameObject>();
-    
+
     public GameObject GetPrefub() {
         return prefabs[Random.Range(0, prefabs.Count)];
     }
@@ -20,5 +20,9 @@ public class GroundManager : MonoBehaviour
         {
             speed += 0.001f;
         }
+    }
+    public void ResetSpeed()
+    {
+        speed = 10;
     }
 }
