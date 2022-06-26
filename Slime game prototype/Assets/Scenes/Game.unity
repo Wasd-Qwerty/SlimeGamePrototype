@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 111036870}
   - component: {fileID: 111036869}
   m_Layer: 5
-  m_Name: Count
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -848,6 +848,8 @@ GameObject:
   - component: {fileID: 218677885}
   - component: {fileID: 218677884}
   - component: {fileID: 218677886}
+  - component: {fileID: 218677887}
+  - component: {fileID: 218677888}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -867,15 +869,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00c74bf31bc3024a9a4b13c3688f69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groundManager: {fileID: 1807313131}
+  _canvas: {fileID: 218677886}
   _player: {fileID: 853736164}
   _mainCamera: {fileID: 160851326}
-  _countObj: {fileID: 263921297}
-  _bestCountObj: {fileID: 1167436458}
   _tutorial: {fileID: 1301056149}
   _audioSource: {fileID: 0}
   _resumeButton: {fileID: 207690185}
-  _groundManager: {fileID: 1807313131}
-  _canvas: {fileID: 218677886}
+  _sm: {fileID: 218677887}
   audioTag: BG_audio_created
   _tutorialIsActive: 0
   _timerIsDead: 0
@@ -912,6 +913,36 @@ MonoBehaviour:
   _gameOverCanvas: {fileID: 1993945077}
   _pauseCanvas: {fileID: 1712149713}
   _pauseButton: {fileID: 2035836403}
+--- !u!114 &218677887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218677883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2d05c7f2080dd14b8cdb28b50feeca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bestScoreText: 0
+  _scoreObj: {fileID: 263921299}
+  _bestScoreObj: {fileID: 1167436460}
+  _savePath: 
+  _saveFileName: score.json
+--- !u!114 &218677888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218677883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa31c3cc284e474b87983646b395c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sm: {fileID: 218677887}
 --- !u!1 &250612233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,7 +1038,7 @@ GameObject:
   - component: {fileID: 263921300}
   - component: {fileID: 263921299}
   m_Layer: 5
-  m_Name: CountText
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2001,7 +2032,7 @@ GameObject:
   - component: {fileID: 1167436461}
   - component: {fileID: 1167436460}
   m_Layer: 5
-  m_Name: BestCountText
+  m_Name: BestScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
