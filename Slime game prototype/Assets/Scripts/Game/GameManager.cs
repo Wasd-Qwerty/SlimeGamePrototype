@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GPGS _gpgs;
     public string audioTag;
     [SerializeField] bool _tutorialIsActive, _timerIsDead, _timerIsResume, _isPaused;
-    [SerializeField] YandexInterstitial _interstitial;
-    [SerializeField] YandexRewardedAd _rewardedAd;
+    /*[SerializeField] YandexInterstitial _interstitial;*/
+    /*[SerializeField] YandexRewardedAd _rewardedAd;*/
     void Start()
     {
         _audioSource = GameObject.FindWithTag(audioTag);
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         _gpgs.OpenSavedGame(true);
     }
     public void GoToMenu(){
-        _interstitial.RequestInterstitial();
+        /*_interstitial.RequestInterstitial();*/
         SceneManager.LoadScene(0);
         _gpgs.OpenSavedGame(true);
     }
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     public void ResumePlay()
     {
         Destroy(_resumeButton.gameObject);
-        _rewardedAd.RequestRewardedAd();
+        /*_rewardedAd.RequestRewardedAd();*/
         _canvas.ResumePlay();
         _timerIsResume = true;
         _timerIsDead = false;
