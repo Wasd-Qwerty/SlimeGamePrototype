@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GroundManager _groundManager;
     [SerializeField] private CanvasManager _canvas;
     [SerializeField] private GameObject _player, _mainCamera, _tutorial, _audioSource, _resumeButton;
+    [SerializeField] private ScoreManager _sm;
     [SerializeField] private GPGS _gpgs;
     public string audioTag;
     [SerializeField] bool _tutorialIsActive, _timerIsDead, _timerIsResume, _isPaused;
@@ -61,16 +62,16 @@ public class GameManager : MonoBehaviour
         _tutorial.SetActive(false);
         _timerIsDead = true;
         _timerIsResume = false;
-        _gpgs.OpenSavedGame(true);
+        _sm.CheckRecord();
     }
     public void GoToMenu(){
         /*_interstitial.RequestInterstitial();*/
         SceneManager.LoadScene(0);
-        _gpgs.OpenSavedGame(true);
+        _sm.CheckRecord();
     }
     public void Replay()
     {
-        _gpgs.OpenSavedGame(true);
+        _sm.CheckRecord();
         if (_audioSource != null)
         {
             _audioSource.GetComponent<AudioSource>().pitch = 1;
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
         _tutorialIsActive = _tutorial.activeSelf;
         Time.timeScale = 0;
         _tutorial.SetActive(false);
-        _gpgs.OpenSavedGame(true);
+        
     }
     public void Resume()
     {
@@ -105,10 +106,11 @@ public class GameManager : MonoBehaviour
     void OnApplicationPause(bool _pauseStatus)
     {
         _isPaused = _pauseStatus;
-        _gpgs.OpenSavedGame(true);
+        _sm.CheckRecord();
     }
     private void OnApplicationQuit()
     {
+        _sm.CheckRecord();
         _gpgs.OpenSavedGame(true);
     }
 }

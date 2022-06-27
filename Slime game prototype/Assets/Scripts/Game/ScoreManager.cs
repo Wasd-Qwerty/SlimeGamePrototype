@@ -51,6 +51,11 @@ public class ScoreManager : MonoBehaviour
             SaveToFile();
         }
     }
+    public void ReceiveDate(float bscore)
+    {
+        bestScoreText = bscore;
+        SaveToFile();
+    }
     void SaveToFile()
     {
         ScoreSave scoreSave = new ScoreSave

@@ -13,7 +13,7 @@ public class GPGS : MonoBehaviour
     private bool _isSaving;
 
     [SerializeField] ScoreManager _sm;
-
+    private float _bScoreText;
     private DateTime startDateTime;
 
     public void Start()
@@ -89,7 +89,7 @@ public class GPGS : MonoBehaviour
     {
         if (status == SavedGameRequestStatus.Success)
         {
-            Debug.Log("Óñïåøíî ñîõðàíèë!");
+            Debug.Log("Save is completed!");
         }
         else
         {
@@ -110,13 +110,12 @@ public class GPGS : MonoBehaviour
             {
                 string dataGoogle = Encoding.ASCII.GetString(data);
 
-                _sm.bestScoreText = float.Parse(dataGoogle);
-
-                Debug.Log("Óñïåøíî çàãðóçèë ");
+                _bScoreText = float.Parse(dataGoogle);
+                _sm.ReceiveDate(_bScoreText);
             }
             else
             {
-                Debug.Log("Íåò äàííûõ íà ñîõðàíåíèå");
+                Debug.Log("Date is empty");
             }
         }
         else
