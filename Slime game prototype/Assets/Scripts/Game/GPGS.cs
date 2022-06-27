@@ -11,15 +11,11 @@ using UnityEngine.UI;
 public class GPGS : MonoBehaviour
 {
     private bool _isSaving;
-
-    [SerializeField] ScoreManager _sm;
+    [SerializeField] private float _bestScoreText;
+    private float _scoreText = 0;
+    [SerializeField] private Text _scoreObj, _bestScoreObj;
     
     private DateTime startDateTime;
-
-    public void Start()
-    {
-        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
-    }
 
     internal void ProcessAuthentication(SignInStatus status)
     {
@@ -33,6 +29,27 @@ public class GPGS : MonoBehaviour
             // Disable your integration with Play Games Services or show a login button
             // to ask users to sign-in. Clicking it should call
             // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
+        }
+    }
+
+    public void Start()
+    {
+        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+    }
+
+    private void Update()
+    {
+        _scoreObj.text = Math.Round(_scoreText, 2).ToString();
+        _bestScoreObj.text = Math.Round(_bestScoreText, 2).ToString();
+        
+        if (Time.timeScale == 1)
+        {
+            _scoreText += Time.deltaTime;
+        }
+
+        if (_scoreText > _bestScoreText)
+        {
+            _bestScoreText = _scoreText;
         }
     }
 
@@ -55,8 +72,9 @@ public class GPGS : MonoBehaviour
         {
             if (_isSaving)
             {
-                string data = Math.Round(_sm.bestScoreText, 2).ToString();
+                string data = Math.Round(_bestScoreText, 2).ToString();
                 byte[] saveData = Encoding.UTF8.GetBytes(data);
+
                 SaveGame(game, saveData);
             }
             else
@@ -109,8 +127,7 @@ public class GPGS : MonoBehaviour
             if (data.Length > 0)
             {
                 string dataGoogle = Encoding.ASCII.GetString(data);
-
-                _sm.bestScoreText = float.Parse(dataGoogle);
+                _bestScoreText = float.Parse(dataGoogle);
 
                 Debug.Log("Успешно загрузил ");
             }
