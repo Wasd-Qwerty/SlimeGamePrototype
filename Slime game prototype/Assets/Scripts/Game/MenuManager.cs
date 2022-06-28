@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     public string audioTag;
     public Image play, quit, AudioController;
     [SerializeField] private int _audioIsOn;
+
     private void Start() {
         Time.timeScale = 1;
         _audioSource = GameObject.FindWithTag(audioTag);

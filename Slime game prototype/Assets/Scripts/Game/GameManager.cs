@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CanvasManager _canvas;
     [SerializeField] private GameObject _player, _mainCamera, _tutorial, _audioSource, _resumeButton;
     [SerializeField] private ScoreManager _sm;
-    [SerializeField] private GPGS _gpgs;
     public string audioTag;
     [SerializeField] bool _tutorialIsActive, _timerIsDead, _timerIsResume, _isPaused;
     /*[SerializeField] YandexInterstitial _interstitial;*/
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
         _tutorialIsActive = _tutorial.activeSelf;
         Time.timeScale = 0;
         _tutorial.SetActive(false);
-        
+        _sm.CheckRecord();
     }
     public void Resume()
     {
@@ -112,6 +111,6 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         _sm.CheckRecord();
-        _gpgs.OpenSavedGame(true);
+        /*_gpgs.OpenSavedGame(true);*/
     }
 }
