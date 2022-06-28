@@ -12,15 +12,25 @@ public class GPGS : MonoBehaviour
 {
     private bool _isSaving;
 
-    [SerializeField] ScoreManager _sm;
+    [SerializeField] GameObject _smobj;
+    ScoreManager _sm;
     private float _bScoreText;
     private DateTime startDateTime;
-
+    private bool _smIsFound;
     public void Start()
     {
         PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+        DontDestroyOnLoad(this.gameObject);
+        _smobj = GameObject.FindWithTag("ScoreManager");
     }
-
+    private void Update()
+    {
+        if (_smobj != null && !_smIsFound)
+        {
+            _sm = GetComponent<ScoreManager>();
+            _smIsFound = true;
+        }
+    }
     internal void ProcessAuthentication(SignInStatus status)
     {
         if (status == SignInStatus.Success)
@@ -28,14 +38,11 @@ public class GPGS : MonoBehaviour
             startDateTime = DateTime.Now;
             OpenSavedGame(false);
         }
-        else
-        {
-            // Disable your integration with Play Games Services or show a login button
-            // to ask users to sign-in. Clicking it should call
-            // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
-        }
     }
-
+    public void LoginGPGS()
+    {
+        PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication);
+    }
     public void OpenSavedGame(bool saving)
     {
         _isSaving = saving;

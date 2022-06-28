@@ -811,7 +811,6 @@ GameObject:
   - component: {fileID: 218677884}
   - component: {fileID: 218677886}
   - component: {fileID: 218677888}
-  - component: {fileID: 218677887}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -838,6 +837,7 @@ MonoBehaviour:
   _tutorial: {fileID: 1301056149}
   _audioSource: {fileID: 0}
   _resumeButton: {fileID: 207690185}
+  _sm: {fileID: 1979195625}
   _gpgs: {fileID: 218677888}
   audioTag: BG_audio_created
   _tutorialIsActive: 0
@@ -873,23 +873,6 @@ MonoBehaviour:
   _gameOverCanvas: {fileID: 1993945077}
   _pauseCanvas: {fileID: 1712149713}
   _pauseButton: {fileID: 2035836403}
---- !u!114 &218677887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218677883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba7f179d358d3704289f0bd3a57d9659, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bestScoreText: 0
-  _scoreObj: {fileID: 263921299}
-  _bestScoreObj: {fileID: 1167436460}
-  _savePath: 
-  _saveFileName: score.json
 --- !u!114 &218677888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,7 +885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa31c3cc284e474b87983646b395c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sm: {fileID: 0}
+  _smobj: {fileID: 0}
 --- !u!1 &250612233
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +981,7 @@ GameObject:
   - component: {fileID: 263921300}
   - component: {fileID: 263921299}
   m_Layer: 5
-  m_Name: ScoreText
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1992,7 +1975,7 @@ GameObject:
   - component: {fileID: 1167436461}
   - component: {fileID: 1167436460}
   m_Layer: 5
-  m_Name: BestScoreText
+  m_Name: BestScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3636,6 +3619,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933150924}
   m_CullTransparentMesh: 1
+--- !u!1 &1979195624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979195626}
+  - component: {fileID: 1979195625}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1979195625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979195624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7f179d358d3704289f0bd3a57d9659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bestScoreText: 0
+  _scoreObj: {fileID: 263921299}
+  _bestScoreObj: {fileID: 1167436460}
+  _savePath: 
+  _saveFileName: score.json
+--- !u!4 &1979195626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979195624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 483.6646, y: 283.2086, z: -150.71533}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1991444927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,7 +3882,7 @@ GameObject:
   - component: {fileID: 2023615882}
   - component: {fileID: 2023615881}
   m_Layer: 5
-  m_Name: BestText
+  m_Name: BestScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

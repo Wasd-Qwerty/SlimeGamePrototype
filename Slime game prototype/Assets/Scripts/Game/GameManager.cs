@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         {
             _audioSource.GetComponent<AudioSource>().pitch = 1;
         }
+        _timerIsDead = false;
         SceneManager.LoadScene(1);
     }
     public void Pause()
