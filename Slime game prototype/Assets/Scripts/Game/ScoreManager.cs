@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
+        Load();
         _bestScoreObj.text = Math.Round(_bestScoreText, 2).ToString();
     }
     void Update()
@@ -34,17 +35,13 @@ public class ScoreManager : MonoBehaviour
             Save();
         }
     }
-    public void Load(SaveDate.PlayerProfile data)
+    public void Load()
     {
-        if (data == null)
-        {
-            data = SaveManager.Load<SaveDate.PlayerProfile>(key);
-        }
+        var data = SaveManager.Load<SaveDate.PlayerProfile>(key);
         _bestScoreText = data.bestScoreText;
     }
     private void Save()
     {
-        CloudSaveManager.Instance.Save();
         SaveManager.Save(key, GetSaveSnapshot());
     }
     public SaveDate.PlayerProfile GetSaveSnapshot()

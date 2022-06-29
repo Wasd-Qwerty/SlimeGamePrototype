@@ -8,6 +8,7 @@ using YandexMobileAds.Base;
 public class YandexRewardedAd : MonoBehaviour
 {
     private RewardedAd _rewardedAd;
+    public bool isLoadError;
     public void RequestRewardedAd()
     {
         if (this._rewardedAd != null)
@@ -17,6 +18,7 @@ public class YandexRewardedAd : MonoBehaviour
 
         // Replace demo R-M-DEMO-rewarded-client-side-rtb with actual Ad Unit ID
         string adUnitId = "R-M-1652221-3";
+
         this._rewardedAd = new RewardedAd(adUnitId);
 
         this._rewardedAd.OnRewardedAdLoaded += this.HandleRewardedAdLoaded;
@@ -34,6 +36,7 @@ public class YandexRewardedAd : MonoBehaviour
     {
         if (this._rewardedAd.IsLoaded())
         {
+            isLoadError = false;
             this._rewardedAd.Show();
         }
         else
@@ -55,6 +58,7 @@ public class YandexRewardedAd : MonoBehaviour
     }
     public void HandleRewardedAdFailedToLoad(object sender, AdFailureEventArgs args)
     {
+        isLoadError = true;
         Debug.Log("HandleRewardedAdFailedToLoad event received with message: » + args.Message");
     }
     public void HandleReturnedToApplication(object sender, EventArgs args)

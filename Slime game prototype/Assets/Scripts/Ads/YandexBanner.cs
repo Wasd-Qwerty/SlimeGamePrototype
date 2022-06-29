@@ -14,9 +14,8 @@ public class YandexBanner : MonoBehaviour
     }
     private void RequestBanner()
     {
-        
-        string adUnitId = "R-M-1652221-5";
 
+        string adUnitId = "R-M-1652221-5";
         if (this._banner != null)
         {
             this._banner.Destroy();

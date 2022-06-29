@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ScoreManager _sm;
     public string audioTag;
     [SerializeField] bool _tutorialIsActive, _timerIsDead, _timerIsResume, _isPaused;
-    /*[SerializeField] YandexInterstitial _interstitial;*/
-    /*[SerializeField] YandexRewardedAd _rewardedAd;*/
+    [SerializeField] YandexInterstitial _interstitial;
+    [SerializeField] YandexRewardedAd _rewardedAd;
     void Start()
     {
         _audioSource = GameObject.FindWithTag(audioTag);
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         _sm.CheckRecord();
     }
     public void GoToMenu(){
-        /*_interstitial.RequestInterstitial();*/
+        _interstitial.RequestInterstitial();
         SceneManager.LoadScene(0);
         _sm.CheckRecord();
     }
@@ -95,13 +95,16 @@ public class GameManager : MonoBehaviour
     public void ResumePlay()
     {
         Destroy(_resumeButton.gameObject);
-        /*_rewardedAd.RequestRewardedAd();*/
-        _canvas.ResumePlay();
-        _timerIsResume = true;
-        _timerIsDead = false;
-        _player.transform.position = new Vector2(-7, 7);
-        _groundManager.ResetSpeed();
-        Time.timeScale = 1f;
+        _rewardedAd.RequestRewardedAd();
+        if (!_rewardedAd.isLoadError)
+        {
+            _canvas.ResumePlay();
+            _timerIsResume = true;
+            _timerIsDead = false;
+            _player.transform.position = new Vector2(-7, 7);
+            _groundManager.ResetSpeed();
+            Time.timeScale = 1f;
+        }
     }
     void OnApplicationPause(bool _pauseStatus)
     {
@@ -111,6 +114,5 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         _sm.CheckRecord();
-        /*_gpgs.OpenSavedGame(true);*/
     }
 }
