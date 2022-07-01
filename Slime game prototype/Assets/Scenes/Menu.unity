@@ -2342,7 +2342,6 @@ MonoBehaviour:
   play: {fileID: 627031820}
   quit: {fileID: 1133319789}
   AudioController: {fileID: 2110465324}
-  _audioIsOn: 0
 --- !u!1 &863774027
 GameObject:
   m_ObjectHideFlags: 0

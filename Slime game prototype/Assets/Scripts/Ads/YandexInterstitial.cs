@@ -13,7 +13,6 @@ public class YandexInterstitial : MonoBehaviour
     public void RequestInterstitial()
     {
         string adUnitId = "R-M-1652221-4";
-
         if (this._interstitial != null)
         {
             this._interstitial.Destroy();

@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _player, _mainCamera, _countObj, _bestCountObj, _tutorial, _audioSource, _resumeButton;
     [SerializeField] private GroundManager _groundManager;
     [SerializeField] private CanvasManager _canvas;
-    [SerializeField] private GameObject _player, _mainCamera, _tutorial, _audioSource, _resumeButton;
-    [SerializeField] private ScoreManager _sm;
+    private float _countText = 0, _bestCountText;
     public string audioTag;
     [SerializeField] bool _tutorialIsActive, _timerIsDead, _timerIsResume, _isPaused;
     [SerializeField] YandexInterstitial _interstitial;
@@ -18,10 +18,25 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _audioSource = GameObject.FindWithTag(audioTag);
+        _bestCountText = PlayerPrefs.GetFloat("bestCount", _bestCountText);
         Time.timeScale = 1;
+        _timerIsResume = true;
     }
     void Update()
     {
+        _bestCountObj.GetComponent<Text>().text = Math.Round(_bestCountText, 2).ToString();
+        if (Time.timeScale == 1)
+        {
+            _countText += Time.deltaTime;
+        }
+        _countObj.GetComponent<Text>().text = Math.Round(_countText, 2).ToString();
+
+        if (_countText > _bestCountText)
+        {
+            _bestCountText = _countText;
+            PlayerPrefs.SetFloat("bestCount", _bestCountText);
+            PlayerPrefs.Save();
+        }
         if (_audioSource != null)
         {
             if (_timerIsDead)
@@ -61,21 +76,17 @@ public class GameManager : MonoBehaviour
         _tutorial.SetActive(false);
         _timerIsDead = true;
         _timerIsResume = false;
-        _sm.CheckRecord();
     }
     public void GoToMenu(){
         _interstitial.RequestInterstitial();
         SceneManager.LoadScene(0);
-        _sm.CheckRecord();
     }
     public void Replay()
     {
-        _sm.CheckRecord();
         if (_audioSource != null)
         {
             _audioSource.GetComponent<AudioSource>().pitch = 1;
         }
-        _timerIsDead = false;
         SceneManager.LoadScene(1);
     }
     public void Pause()
@@ -84,7 +95,6 @@ public class GameManager : MonoBehaviour
         _tutorialIsActive = _tutorial.activeSelf;
         Time.timeScale = 0;
         _tutorial.SetActive(false);
-        _sm.CheckRecord();
     }
     public void Resume()
     {
@@ -96,23 +106,16 @@ public class GameManager : MonoBehaviour
     {
         Destroy(_resumeButton.gameObject);
         _rewardedAd.RequestRewardedAd();
-        if (!_rewardedAd.isLoadError)
-        {
-            _canvas.ResumePlay();
-            _timerIsResume = true;
-            _timerIsDead = false;
-            _player.transform.position = new Vector2(-7, 7);
-            _groundManager.ResetSpeed();
-            Time.timeScale = 1f;
-        }
+        _canvas.ResumePlay();
+        _timerIsResume = true;
+        _timerIsDead = false;
+        _player.transform.position = new Vector2(-7, 7);
+        _groundManager.ResetSpeed();
+        Time.timeScale = 1f;
     }
     void OnApplicationPause(bool _pauseStatus)
     {
         _isPaused = _pauseStatus;
-        _sm.CheckRecord();
     }
-    private void OnApplicationQuit()
-    {
-        _sm.CheckRecord();
-    }
+
 }

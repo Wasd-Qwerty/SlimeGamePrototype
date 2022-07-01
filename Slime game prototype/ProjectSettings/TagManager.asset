@@ -8,7 +8,6 @@ TagManager:
   - Ground
   - Coin
   - BG_audio_created
-  - ScoreManager
   layers:
   - Default
   - TransparentFX
