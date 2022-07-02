@@ -7,7 +7,9 @@ using YandexMobileAds.Base;
 
 public class YandexRewardedAd : MonoBehaviour
 {
-    private RewardedAd _rewardedAd;
+    RewardedAd _rewardedAd;
+    [SerializeField] GameObject _resumeButton;
+    [SerializeField] GameManager _gm;
     public void RequestRewardedAd()
     {
         if (this._rewardedAd != null)
@@ -51,7 +53,9 @@ public class YandexRewardedAd : MonoBehaviour
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
-        ShowRewardedAd(); //реклама загружена Ч показываем еЄ
+        _resumeButton.SetActive(true);
+        Debug.Log("RewardedAd is Load");
+
     }
     public void HandleRewardedAdFailedToLoad(object sender, AdFailureEventArgs args)
     {
@@ -71,6 +75,8 @@ public class YandexRewardedAd : MonoBehaviour
     }
     public void HandleRewardedAdDismissed(object sender, EventArgs args)
     {
+        _gm.ResumePlay();
+        _resumeButton.SetActive(false);
         Debug.Log("HandleRewardedAdDismissed event received");
     }
     public void HandleImpression(object sender, ImpressionData impressionData)

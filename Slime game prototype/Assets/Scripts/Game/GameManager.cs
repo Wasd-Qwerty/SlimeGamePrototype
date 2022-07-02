@@ -17,10 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] YandexRewardedAd _rewardedAd;
     void Start()
     {
+        _rewardedAd.RequestRewardedAd();
+        _resumeButton.SetActive(false);
         _audioSource = GameObject.FindWithTag(audioTag);
         _bestCountText = PlayerPrefs.GetFloat("bestCount", _bestCountText);
         Time.timeScale = 1;
-        _timerIsResume = true;
     }
     void Update()
     {
@@ -104,8 +105,6 @@ public class GameManager : MonoBehaviour
     }
     public void ResumePlay()
     {
-        Destroy(_resumeButton.gameObject);
-        _rewardedAd.RequestRewardedAd();
         _canvas.ResumePlay();
         _timerIsResume = true;
         _timerIsDead = false;
