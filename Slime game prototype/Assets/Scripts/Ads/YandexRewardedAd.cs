@@ -17,10 +17,9 @@ public class YandexRewardedAd : MonoBehaviour
             this._rewardedAd.Destroy();
         }
 
-        // Replace demo R-M-DEMO-rewarded-client-side-rtb with actual Ad Unit ID
         string adUnitId = "R-M-1652221-3";
-        this._rewardedAd = new RewardedAd(adUnitId);
 
+        this._rewardedAd = new RewardedAd(adUnitId);
         this._rewardedAd.OnRewardedAdLoaded += this.HandleRewardedAdLoaded;
         this._rewardedAd.OnRewardedAdFailedToLoad += this.HandleRewardedAdFailedToLoad;
         this._rewardedAd.OnReturnedToApplication += this.HandleReturnedToApplication;
